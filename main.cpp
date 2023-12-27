@@ -1,24 +1,97 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <string>
+#include "input_form.hpp"
+
+// class A {
+//     void draw() {
+        
+//     }
+// };
 
 int main() {
 
-    sf::RenderWindow window(sf::VideoMode().getDesktopMode(), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+        bool is_cap = false;
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
+        sf::ContextSettings settings;
+        settings.antialiasingLevel = 100;
+
+        sf::Font font;
+
+        if (!font.loadFromFile("/usr/share/fonts/opentype/cantarell/Cantarell-Bold.otf")) {
+            throw "font error";
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+        sf::Text text;
+
+        text.setFont(font);
+        text.setPosition(sf::Vector2f(200,200));
+
+        // WINDOW
+        sf::RenderWindow window(sf::VideoMode(800, 780), "Chat", sf::Style::Default, settings);
+
+        window.setFramerateLimit(140);
+
+
+        // SHAPES
+        sf::CircleShape circle(100);
+        circle.setFillColor(sf::Color::Green);
+
+        sf::RectangleShape rect(sf::Vector2f(100,50));
+        rect.setFillColor(sf::Color::Red);
+
+
+        InputForm input_form;
+
+        // MAIN LOOP
+        while (window.isOpen())
+        {
+
+            // window.setPosition(sf::Vector2i(10, 10));
+            
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                switch (event.type) {
+
+                    case sf::Event::Closed:
+                        window.close();
+                        break;
+
+                    case sf::Event::KeyPressed:
+
+                        std::cout << event.key.code << '\n';
+
+                        if (event.key.code == 38) {
+                            is_cap = true;
+                        } else if (event.key.code >= 0 && event.key.code <= 26){
+                            input_text += (event.key.code + (is_cap ? 65: 97));
+                        } else {
+                            input_text += event.key.code;
+                        }
+                        break;
+
+                    case sf::Event::KeyReleased:
+                        if (event.key.code == 38) {
+                            is_cap = false;
+                        }
+                        break;
+
+
+                    default:
+                        break;
+                }
+            }
+            
+
+            text.setString(input_text);
+            window.draw(text);
+            
+
+            window.display();
+            window.clear();
+
+        }
 
     return 0;
 }

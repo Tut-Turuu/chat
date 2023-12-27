@@ -16,11 +16,13 @@ include_directories("inc/graphic/" "inc/network" "src/graphic/" "src/network")
 set(
     SOURCES
     main.cpp
+    src/graphic/input_form.cpp
 )
 
 
 set(
     HEADERS
+    inc/graphic/input_form.hpp
 )
 
 add_compile_options(
