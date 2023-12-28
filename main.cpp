@@ -60,15 +60,20 @@ int main() {
 
                     case sf::Event::KeyPressed:
 
-                        std::cout << event.key.code << '\n';
+                        // std::cout << event.key.code << '\n';
 
                         if (event.key.code == 38) {
                             is_cap = true;
+                        } else if (event.key.code == 58 && input_form.get_length() > 0) {
+                            // NOT FULLY IMPLEMENTED
+                            input_form.get_content();
+                        
                         } else if (event.key.code >= 0 && event.key.code <= 26){
-                            input_text += (event.key.code + (is_cap ? 65: 97));
+                            input_form.append(event.key.code + (is_cap ? 65: 97));
                         } else {
-                            input_text += event.key.code;
+                            input_form.append(event.key.code);
                         }
+                        input_form.debug();
                         break;
 
                     case sf::Event::KeyReleased:
@@ -84,8 +89,7 @@ int main() {
             }
             
 
-            text.setString(input_text);
-            window.draw(text);
+            input_form.draw(window, font);
             
 
             window.display();
