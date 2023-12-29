@@ -17,12 +17,14 @@ set(
     SOURCES
     main.cpp
     src/graphic/input_form.cpp
+    src/graphic/buttons.cpp
 )
 
 
 set(
     HEADERS
     inc/graphic/input_form.hpp
+    inc/graphic/buttons.hpp
 )
 
 add_compile_options(

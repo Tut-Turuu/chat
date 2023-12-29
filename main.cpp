@@ -58,6 +58,12 @@ int main() {
                         window.close();
                         break;
 
+                    case sf::Event::MouseButtonPressed:
+                        if (event.mouseButton.button == sf::Mouse::Left) {
+
+                        }
+                        break;
+
                     case sf::Event::KeyPressed:
 
                         // std::cout << event.key.code << '\n';
