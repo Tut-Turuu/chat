@@ -2,12 +2,9 @@
 #include <iostream>
 #include <string>
 #include "input_form.hpp"
+#include "buttons.hpp"
 
-// class A {
-//     void draw() {
-        
-//     }
-// };
+
 
 int main() {
 
@@ -34,14 +31,15 @@ int main() {
 
 
         // SHAPES
-        sf::CircleShape circle(100);
-        circle.setFillColor(sf::Color::Green);
+        // sf::CircleShape circle(100);
+        // circle.setFillColor(sf::Color::Green);
 
-        sf::RectangleShape rect(sf::Vector2f(100,50));
-        rect.setFillColor(sf::Color::Red);
+        // sf::RectangleShape rect(sf::Vector2f(100,50));
+        // rect.setFillColor(sf::Color::Red);
 
 
         InputForm input_form;
+        Button button(10, 20, 100, 110, "../assets/mount.jpeg");
 
         // MAIN LOOP
         while (window.isOpen())
@@ -94,7 +92,7 @@ int main() {
                 }
             }
             
-
+            button.draw(window);
             input_form.draw(window, font);
             
 
