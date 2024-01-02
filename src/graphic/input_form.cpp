@@ -7,7 +7,11 @@
 namespace graph {
 
 
-    InputForm::InputForm() {
+    InputForm::InputForm(size_t x0, size_t x1, size_t y0, size_t y1) {
+        this->x0 = x0;
+        this->x1 = x1;
+        this->y0 = y0;
+        this->y1 = y1;
 
         content = "";
         length = 0;
@@ -20,16 +24,37 @@ namespace graph {
     void InputForm::draw(sf::RenderWindow& window, sf::Font& font) {
         sf::Text buffer;
         buffer.setFont(font);
+        size_t x2, x3, y2;
 
-        size_t x = 100;
-        size_t y = 100;
+        size_t offset = 10;
+        x2 = x0 + offset;
+        x3 = x1 - offset;
+        y2 = y0 + offset;
+        // y3 = y1 - offset;
 
-        for (size_t i = 0; i <= length / 20; i++) {
-            buffer.setString(content.substr(i*20, 20));
-            buffer.setPosition(sf::Vector2f(x, y));
-            y += 40;
+        size_t current_symbol = 0;
+
+        size_t y = y2;
+
+        for (size_t i = 1; i <= length; i++) {
+            buffer.setString(content.substr(current_symbol, i - current_symbol));
+            if (buffer.getLocalBounds().width < (x3 - x2)) {
+                buffer.setPosition(sf::Vector2f(x2, y));
+                continue;
+            } else {
+                current_symbol = i - 1;
+                y += 30;
+            }
+
             window.draw(buffer);
-            // std::cout << "Times: " << i << '\n';
+
+            // buffer.setString(content.substr(i*20, 20));
+            // buffer.setPosition(sf::Vector2f(x, y));
+            // y += 40;
+            // window.draw(buffer);
+
+            // std::cout << buffer.getLocalBounds().height << ' ' << buffer.getLocalBounds().width << '\n';
+            // // std::cout << "Times: " << i << '\n';
         }
     }
 

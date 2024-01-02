@@ -9,7 +9,7 @@ namespace err {
         void what();
     };
 
-    class FontLoadErr : std::exception {
+    class TextureLoadErr : std::exception {
         void what();
     };
 }

@@ -13,6 +13,7 @@ namespace graph {
         sf::Sprite sprite;
 
     public:
+
         Button(size_t x0, size_t x1, size_t y0, size_t y1, const char* image_loc);
 
         bool is_clicked(size_t x, size_t y);

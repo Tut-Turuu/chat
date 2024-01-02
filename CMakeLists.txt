@@ -11,13 +11,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 
-include_directories("inc/graphic/" "inc/network" "src/graphic/" "src/network")
+include_directories("inc/graphic/" "inc/network" "inc/exceptions" "src/graphic/" "src/network" "src/exceptions")
 
 set(
     SOURCES
     main.cpp
     src/graphic/input_form.cpp
     src/graphic/buttons.cpp
+    src/exceptions/button_exceptions.cpp
 )
 
 
@@ -25,6 +26,7 @@ set(
     HEADERS
     inc/graphic/input_form.hpp
     inc/graphic/buttons.hpp
+    inc/exceptions/button_exceptions.hpp
 )
 
 add_compile_options(

@@ -12,7 +12,7 @@ namespace graph {
         this->y1 = y1;
 
         if (!texture.loadFromFile(image_loc)) {
-            throw err::FontLoadErr();
+            throw err::TextureLoadErr();
         }
         sf::Vector2u size = texture.getSize();
 
@@ -39,7 +39,5 @@ namespace graph {
         window.draw(sprite);
     }
 
-    SendButton::SendButton(size_t x0, size_t x1, size_t y0, size_t y1, const char* image_loc) {
-        
-    }
+    SendButton::SendButton(size_t x0, size_t x1, size_t y0, size_t y1, const char* image_loc):Button(x0, x1, y0, y1, image_loc){}
 }

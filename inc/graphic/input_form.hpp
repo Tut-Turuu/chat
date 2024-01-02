@@ -10,11 +10,12 @@ namespace graph {
 
         std::string content;
         size_t length;
+        size_t x0, x1, y0, y1;
 
 
     public:
 
-        InputForm();
+        InputForm(size_t x0, size_t x1, size_t y0, size_t y1);
 
         void debug();
 

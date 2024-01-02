@@ -25,7 +25,7 @@ int main() {
         text.setPosition(sf::Vector2f(200,200));
 
         // WINDOW
-        sf::RenderWindow window(sf::VideoMode(800, 780), "Chat", sf::Style::Fullscreen, settings);
+        sf::RenderWindow window(sf::VideoMode(800, 780), "Chat", sf::Style::Default, settings);
 
         window.setFramerateLimit(140);
 
@@ -38,8 +38,8 @@ int main() {
         // rect.setFillColor(sf::Color::Red);
 
 
-        graph::InputForm input_form;
-        graph::SendButton send_button(10, 20, 100, 110, "../assets/mount.jpg");
+        graph::InputForm input_form(100, 500, 100, 200);
+        graph::SendButton send_button(10, 40, 100, 130, "../assets/button.png");
         
 
         // MAIN LOOP
