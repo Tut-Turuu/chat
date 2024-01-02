@@ -25,7 +25,7 @@ int main() {
         text.setPosition(sf::Vector2f(200,200));
 
         // WINDOW
-        sf::RenderWindow window(sf::VideoMode(800, 780), "Chat", sf::Style::Default, settings);
+        sf::RenderWindow window(sf::VideoMode(800, 780), "Chat", sf::Style::Fullscreen, settings);
 
         window.setFramerateLimit(140);
 
@@ -38,8 +38,9 @@ int main() {
         // rect.setFillColor(sf::Color::Red);
 
 
-        InputForm input_form;
-        Button button(10, 20, 100, 110, "../assets/mount.jpeg");
+        graph::InputForm input_form;
+        graph::SendButton send_button(10, 20, 100, 110, "../assets/mount.jpg");
+        
 
         // MAIN LOOP
         while (window.isOpen())
@@ -77,7 +78,6 @@ int main() {
                         } else {
                             input_form.append(event.key.code);
                         }
-                        input_form.debug();
                         break;
 
                     case sf::Event::KeyReleased:
@@ -92,8 +92,9 @@ int main() {
                 }
             }
             
-            button.draw(window);
+            // button.draw(window);
             input_form.draw(window, font);
+            send_button.draw(window);
             
 
             window.display();

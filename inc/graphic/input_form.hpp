@@ -3,24 +3,28 @@
 
 #pragma once
 
-class InputForm {
 
-    std::string content;
-    size_t length;
+namespace graph {
+
+    class InputForm {
+
+        std::string content;
+        size_t length;
 
 
-public:
+    public:
 
-    InputForm();
+        InputForm();
 
-    void debug();
+        void debug();
 
-    void draw(sf::RenderWindow& window, sf::Font& font);
+        void draw(sf::RenderWindow& window, sf::Font& font);
 
-    void append(char letter);
+        void append(char letter);
 
-    std::string get_content();
+        std::string get_content();
 
-    size_t get_length();
-};
+        size_t get_length();
+    };
+}
 
