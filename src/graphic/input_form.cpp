@@ -7,7 +7,6 @@
 
 namespace graph {
 
-
     InputForm::InputForm(size_t x0, size_t x1, size_t y0, size_t y1, size_t offset, sf::Font& font) {
         this->x0 = x0;
         this->x1 = x1;
@@ -22,20 +21,24 @@ namespace graph {
 
     void InputForm::draw(sf::RenderWindow& window) {
 
-        // size_t x2, x3, y2, y;
-        // x2 = x0 + offset;
-        // x3 = x1 - offset;
-        // y2 = y0 + offset;
+        size_t x2, x3, y2, y3, y;
 
-        // y = y2;
+        x2 = x0 + offset;
+        x3 = x1 - offset;
+        y2 = y0 + offset;
+        y3 = y1 - offset;
 
-        window.clear();
+        y = y2;
+
+        sf::Text buffer;
+        buffer.setFont(font);
 
         for (size_t i = 0; i < content.size(); i++) {
-            std::cout << content[i] << ' ';
+            buffer.setString(content[i]);
+            buffer.setPosition(sf::Vector2f(x2, y));
+            window.draw(buffer);
+            y += 35;
         }
-        std::cout << '\n';
-
     }
 
     void InputForm::append(char letter) {
@@ -63,15 +66,15 @@ namespace graph {
         }
     }
 
-        std::string InputForm::get_content() {
-            std::string tmp = "";
-            for (size_t i = 0; i < content.size(); i++) {
-                tmp +=  content[i];
-            }
-            content.clear();
-            length = 0;
-            return tmp;
+    std::string InputForm::get_content() {
+        std::string tmp = "";
+        for (size_t i = 0; i < content.size(); i++) {
+            tmp +=  content[i];
         }
+        content.clear();
+        length = 0;
+        return tmp;
+    }
     
 
 

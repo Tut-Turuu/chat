@@ -3,6 +3,7 @@
 #include <string>
 #include "input_form.hpp"
 #include "buttons.hpp"
+#include "to_ascii.hpp"
 
 
 
@@ -65,24 +66,20 @@ int main() {
 
                     case sf::Event::KeyPressed:
 
-                        // std::cout << event.key.code << '\n';
-
                         if (event.key.code == 38) {
-                            is_cap = true;
-                        } else if (event.key.code == 58 && input_form.get_length() > 0) {
-                            // NOT FULLY IMPLEMENTED
-                            input_form.get_content();
-                        
-                        } else if (event.key.code >= 0 && event.key.code <= 26){
-                            input_form.append(event.key.code + (is_cap ? 65: 97));
-                        } else {
-                            input_form.append(event.key.code);
+                            is_cap = !is_cap;
+                        } else if (event.key.code == -1) {
+                            is_cap = !is_cap;
+                        } else { // here only char keys
+                            input_form.append(ut::key_code_to_ascii(event.key.code, is_cap));
                         }
+
+                        std::cout << event.key.code << '\n';
                         break;
 
                     case sf::Event::KeyReleased:
                         if (event.key.code == 38) {
-                            is_cap = false;
+                            is_cap = !is_cap;
                         }
                         break;
 
