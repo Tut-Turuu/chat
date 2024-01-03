@@ -38,7 +38,7 @@ int main() {
         // rect.setFillColor(sf::Color::Red);
 
 
-        graph::InputForm input_form(100, 500, 100, 200);
+        graph::InputForm input_form(100, 500, 100, 200, 10, font);
         graph::SendButton send_button(10, 40, 100, 130, "../assets/button.png");
         
 
@@ -93,7 +93,7 @@ int main() {
             }
             
             // button.draw(window);
-            input_form.draw(window, font);
+            input_form.draw(window);
             send_button.draw(window);
             
 
