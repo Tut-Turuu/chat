@@ -16,7 +16,7 @@ namespace graph {
 
         length = 0;
 
-        this->font = font;
+        this->font = &font;
     }
 
     void InputForm::draw(sf::RenderWindow& window) {
@@ -31,7 +31,7 @@ namespace graph {
         y = y2;
 
         sf::Text buffer;
-        buffer.setFont(font);
+        buffer.setFont(*font);
 
         for (size_t i = 0; i < content.size(); i++) {
             buffer.setString(content[i]);
@@ -53,7 +53,7 @@ namespace graph {
             tmp += letter;
             
             sf::Text buffer;
-            buffer.setFont(font);
+            buffer.setFont(*font);
             buffer.setString(tmp);
 
             if (buffer.getLocalBounds().width <= x1 - x0 - 2*offset) {
@@ -64,6 +64,16 @@ namespace graph {
             }
 
         }
+    }
+    void InputForm::pop_back() {
+        if (content.size() != 0) {
+            if (content[content.size() - 1].length() == 0) {
+                content.pop_back();
+            }
+            if (content.size() != 0) {
+                content[content.size() - 1].pop_back();
+            }
+        } 
     }
 
     std::string InputForm::get_content() {

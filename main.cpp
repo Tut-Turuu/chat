@@ -70,7 +70,12 @@ int main() {
                             is_cap = !is_cap;
                         } else if (event.key.code == -1) {
                             is_cap = !is_cap;
-                        } else { // here only char keys
+                        } else if (event.key.code == 59) {
+                            input_form.pop_back();
+                        } else if (event.key.code == 58) {
+                            input_form.get_content(); // implement with sockets networking later
+                        } else { 
+                            // here only char keys
                             input_form.append(ut::key_code_to_ascii(event.key.code, is_cap));
                         }
 

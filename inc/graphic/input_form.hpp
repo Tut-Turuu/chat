@@ -10,7 +10,7 @@ namespace graph {
     class InputForm {
 
         std::vector<std::string> content;
-        sf::Font font;
+        sf::Font* font;
         size_t length;
         size_t x0, x1, y0, y1, offset;
 
@@ -22,6 +22,8 @@ namespace graph {
         void draw(sf::RenderWindow& window);
 
         void append(char letter);
+
+        void pop_back();
 
         std::string get_content();
 
