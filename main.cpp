@@ -31,17 +31,10 @@ int main() {
         window.setFramerateLimit(140);
 
 
-        // SHAPES
-        // sf::CircleShape circle(100);
-        // circle.setFillColor(sf::Color::Green);
-
-        // sf::RectangleShape rect(sf::Vector2f(100,50));
-        // rect.setFillColor(sf::Color::Red);
-
-
-        graph::InputForm input_form(100, 500, 100, 200, 10, font);
-        graph::SendButton send_button(10, 40, 100, 130, "../assets/button.png");
-        
+        graph::InputForm input_form(100, 500, 100, 500, 10, font);
+        graph::Button send_button(550, 580, 100, 130, "../assets/button.png");
+        graph::Button shift_up(500, 530, 100, 130, "../assets/button.png");
+        graph::Button shift_down(500, 530, 470, 500, "../assets/button.png");
 
         // MAIN LOOP
         while (window.isOpen())
@@ -60,7 +53,16 @@ int main() {
 
                     case sf::Event::MouseButtonPressed:
                         if (event.mouseButton.button == sf::Mouse::Left) {
+                            size_t x = event.mouseButton.x;
+                            size_t y = event.mouseButton.y;
 
+                            if (send_button.is_clicked(x, y)) {
+                                input_form.get_content();
+                            } else if (shift_up.is_clicked(x, y)) {
+                                input_form.shift_up();
+                            } else if (shift_down.is_clicked(x, y)) {
+                                input_form.shift_down();
+                            }
                         }
                         break;
 
@@ -79,7 +81,7 @@ int main() {
                             input_form.append(ut::key_code_to_ascii(event.key.code, is_cap));
                         }
 
-                        std::cout << event.key.code << '\n';
+                        // std::cout << event.key.code << '\n';
                         break;
 
                     case sf::Event::KeyReleased:
@@ -97,6 +99,8 @@ int main() {
             // button.draw(window);
             input_form.draw(window);
             send_button.draw(window);
+            shift_up.draw(window);
+            shift_down.draw(window);
             
 
             window.display();

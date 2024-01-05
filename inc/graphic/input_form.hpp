@@ -13,6 +13,7 @@ namespace graph {
         sf::Font* font;
         size_t length;
         size_t x0, x1, y0, y1, offset;
+        size_t start_line;
 
 
     public:
@@ -28,6 +29,10 @@ namespace graph {
         std::string get_content();
 
         size_t get_length();
+
+        void shift_up();
+
+        void shift_down();
     };
 }
 

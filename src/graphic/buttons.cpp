@@ -31,13 +31,7 @@ namespace graph {
         return false;
     }
 
-    void Button::on_click() {
-        throw "Abstract class";
-    }
-
     void Button::draw(sf::RenderWindow& window) {
         window.draw(sprite);
     }
-
-    SendButton::SendButton(size_t x0, size_t x1, size_t y0, size_t y1, const char* image_loc):Button(x0, x1, y0, y1, image_loc){}
 }

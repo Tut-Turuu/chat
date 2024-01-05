@@ -15,6 +15,7 @@ namespace graph {
         this->offset = offset;
 
         length = 0;
+        start_line = 0;
 
         this->font = &font;
     }
@@ -28,14 +29,34 @@ namespace graph {
         y2 = y0 + offset;
         y3 = y1 - offset;
 
+        sf::RectangleShape outer_rec(sf::Vector2f(x1 - x0, y1 - y0));
+        outer_rec.setPosition(sf::Vector2f(x0, y0));
+        outer_rec.setFillColor(sf::Color::Magenta);
+        window.draw(outer_rec);
+
+        sf::RectangleShape inner_rec(sf::Vector2f(x3 - x2, y3 - y2));
+        inner_rec.setPosition(sf::Vector2f(x2, y2));
+        inner_rec.setFillColor(sf::Color::Black);
+        window.draw(inner_rec);
+
         y = y2;
 
         sf::Text buffer;
         buffer.setFont(*font);
+        
+        if (content.size() > (y3 - y2)/35 + start_line) {
+            for (size_t i = 0; i < content.size() - start_line - (y3 - y2)/35; i++) {
+                shift_down();
+            }
+        } else {
+            while (content.size() < start_line + 1 && content.size() != 0) {
+                shift_up();
+            }
+        }
 
-        for (size_t i = 0; i < content.size(); i++) {
+        for (size_t i = start_line; i < content.size(); i++) {
             buffer.setString(content[i]);
-            buffer.setPosition(sf::Vector2f(x2, y));
+            buffer.setPosition(sf::Vector2f(x2 + 4, y));
             window.draw(buffer);
             y += 35;
         }
@@ -56,7 +77,7 @@ namespace graph {
             buffer.setFont(*font);
             buffer.setString(tmp);
 
-            if (buffer.getLocalBounds().width <= x1 - x0 - 2*offset) {
+            if (buffer.getLocalBounds().width <= x1 - x0 - 2*offset - 4) {
                 content[content.size() - 1] = tmp;
             } else {
                 content.push_back("");
@@ -82,6 +103,7 @@ namespace graph {
             tmp +=  content[i];
         }
         content.clear();
+        start_line = 0;
         length = 0;
         return tmp;
     }
@@ -90,6 +112,18 @@ namespace graph {
 
     size_t InputForm::get_length() {
         return length;
+    }
+
+    void InputForm::shift_up() {
+        if (start_line != 0) {
+            start_line--;
+        }
+    }
+
+    void InputForm::shift_down() {
+        if (start_line != content.size() - 1) {
+            start_line++;
+        }
     }
 }
 
